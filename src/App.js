@@ -4,13 +4,14 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import { css, injectGlobal } from 'emotion'
 
+import { TeamProvider } from './application/team/TeamContext'
 import Game from './views/game/Game'
-import SelectTeam from './views/select-team/SelectTeam'
+import SelectTeam from './views/select-team/SelectTeam.container'
 import AnaglyphicText from './components/anaglyphic-text/AnaglyphicText'
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
-  uri: 'http://'
+  uri: 'http://',
 })
 
 injectGlobal`
@@ -51,10 +52,12 @@ class App extends Component {
           <AnaglyphicText>CooperClick</AnaglyphicText>
         </header>
         <BrowserRouter>
-          <div className={mainStyle}>
-            <Route exact path="/" component={SelectTeam} />
-            <Route path="/game/:gameId" component={Game} />
-          </div>
+          <TeamProvider>
+            <div className={mainStyle}>
+              <Route exact path="/" component={SelectTeam} />
+              <Route path="/game/:gameId" component={Game} />
+            </div>
+          </TeamProvider>
         </BrowserRouter>
       </ApolloProvider>
     )

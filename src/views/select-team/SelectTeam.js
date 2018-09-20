@@ -1,15 +1,17 @@
 import React from 'react'
-import TeamButton from '../../components/team-button/TeamButton'
+import { withRouter } from 'react-router-dom'
 import { css } from 'emotion'
+import TeamButton from '../../components/team-button/TeamButton'
 
 const subtitleStyle = css`
   color: #222;
   text-shadow: 0 2px 3px #555;
 `
 
-export default class SelectTeam extends React.Component {
+class SelectTeam extends React.Component {
   chooseTeam = team => () => {
-    console.log(team)
+    this.props.setTeam(team)
+    this.props.history.push('/game/fight-room-34')
   }
 
   render() {
@@ -30,3 +32,5 @@ export default class SelectTeam extends React.Component {
     )
   }
 }
+
+export default withRouter(SelectTeam)

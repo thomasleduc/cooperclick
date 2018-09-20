@@ -1,13 +1,18 @@
 import React from 'react'
 import HexagonLayout from '../../components/hexagon/HexagonLayout'
+import { TeamConsumer } from '../../application/team/TeamContext'
 
 export default class Game extends React.Component {
   render() {
     return (
-      <div>
-        <p>A good game</p>
-        <HexagonLayout />
-      </div>
+      <TeamConsumer>
+        {({ team }) => (
+          <div>
+            <p>A good game {team.name}</p>
+            <HexagonLayout />
+          </div>
+        )}
+      </TeamConsumer>
     )
   }
 }
