@@ -18,7 +18,6 @@ export default class HexagonLayout extends React.Component {
   }
 
   layoutNeedMoreRows(rowNumber) {
-    console.log('rowNumber: ', rowNumber)
     return Math.abs(rowNumber) < this.props.size
   }
 
