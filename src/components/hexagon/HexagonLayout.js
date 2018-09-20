@@ -69,6 +69,7 @@ export default class HexagonLayout extends React.Component {
               y={hexagon.y}
               id={hexagon.id}
               key={hexagon.id}
+              color={this.props.team.color}
             />
           ))}
         </React.Fragment>
