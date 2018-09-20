@@ -36,7 +36,7 @@ class App extends Component {
         </header>
         <BrowserRouter>
           <div>
-            <Route path="/" component={SelectTeam} />
+            <Route exact path="/" component={SelectTeam} />
             <Route path="/game/:gameId" component={Game} />
           </div>
         </BrowserRouter>

@@ -5,8 +5,9 @@ export default class SelectTeam extends React.Component {
   render() {
     return (
       <div>
-        <TeamButton teamLabel="The bad" color="red" />
-        <TeamButton teamLabel="The ugly" color="blue" />
+        <h3>Select your team</h3>
+        <TeamButton teamName="The bad" color="red" />
+        <TeamButton teamName="The ugly" color="blue" />
       </div>
     )
   }
