@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Router, Route, browserHistory } from 'react-router'
 import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
-import { injectGlobal } from 'emotion'
-import Game from 'views/game/Game'
-import SelectTeam from 'views/select-team/SelectTeam'
+import { injectGlobal } from 'react-emotion'
+
+import Game from './views/game/Game'
+import SelectTeam from './views/select-team/SelectTeam'
 
 const networkInterface = createNetworkInterface({
   uri: 'https://api.graph.cool/simple/v1/__PROJECT_ID__'
