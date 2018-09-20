@@ -14,7 +14,7 @@ const HexagonLayoutContainer = styled('div')`
 
 export default class HexagonLayout extends React.Component {
   static defaultProps = {
-    size: 1
+    size: 1,
   }
 
   layoutNeedMoreRows(rowNumber) {
@@ -31,7 +31,7 @@ export default class HexagonLayout extends React.Component {
       hexes.push({
         x: rowOffsetLeft + hexOffsetLeft,
         y: LAYOUT_HEIGHT / 2 - rowNumber * HEX_SIZE,
-        id: rowNumber * 10 + (rowNumber >= 0 ? i : -i)
+        id: rowNumber * 10 + (rowNumber >= 0 ? i : -i),
       })
     }
 
@@ -39,7 +39,7 @@ export default class HexagonLayout extends React.Component {
       return [
         ...this.getRows(rowNumber + 1, hexCount - 1),
         ...hexes,
-        ...this.getRows(rowNumber - 1, hexCount - 1)
+        ...this.getRows(rowNumber - 1, hexCount - 1),
       ]
     } else if (this.layoutNeedMoreRows(rowNumber)) {
       return [
@@ -47,7 +47,7 @@ export default class HexagonLayout extends React.Component {
           rowNumber > 0 ? rowNumber + 1 : rowNumber - 1,
           hexCount - 1
         ),
-        ...hexes
+        ...hexes,
       ]
     }
     return hexes
