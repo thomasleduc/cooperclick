@@ -22,6 +22,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-plugin-emotion": "^9.2.10",
     "graphql-to-json": "^1.1.2",
     "prettier": "1.14.3"
   }
