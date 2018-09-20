@@ -4,45 +4,48 @@ import { css } from 'emotion'
 
 const hexOuter = css`
   background: #abf8ff;
-  width: 210px;
-  height: 120px;
+  width: 100px;
+  height: 58px;
 `
 const hexInner = css`
   background: #373940;
-  width: 200px;
-  height: 115px;
+  width: 94.5px;
+  height: 55.5px;
   position: relative;
-  left: 5px;
-  top: 82px !important;
+  left: 2.5px;
+  top: 51px !important;
   border-radius: 0;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
 `
 const h1 = css`
   position: absolute;
-  top: 80px;
+  top: 50px;
 `
 const h2 = css`
   position: absolute;
-  top: 80px;
+  top: 50px;
   transform: rotate(60deg);
   -webkit-transform: rotate(60deg);
 `
 const h3 = css`
   position: absolute;
-  top: 80px;
+  top: 50px;
   transform: rotate(-60deg);
   -webkit-transform: rotate(-60deg);
 `
 
 const HexFrame = styled('div')`
-  width: 210px;
-  height: 0px;
+  left: ${props => `${props.x}px`};
+  top: ${props => `${props.y}px`};
+  display: inline-block;
+  width: 100px;
+  height: 58px;
   margin: 0 auto;
   margin-top: 20px;
-  position: relative;
+  position: absolute;
   cursor: pointer;
-  transform-origin: 50% 115px;
+  transform-origin: 50% 58px;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
   &:hover {
@@ -72,9 +75,9 @@ const HexLabel = styled('div')`
   position: absolute;
   color: #abf8ff;
   font-weight: bold;
-  font-size: 160px;
-  left: 59px;
-  top: 26px;
+  font-size: 100px;
+  left: 22px;
+  top: 7px;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
 `
@@ -82,7 +85,7 @@ const HexLabel = styled('div')`
 export default class HexagonTile extends React.Component {
   render() {
     return (
-      <HexFrame>
+      <HexFrame x={this.props.x} y={this.props.y}>
         <HexOuter1 />
         <HexOuter2 />
         <HexOuter3 />

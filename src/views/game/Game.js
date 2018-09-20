@@ -1,12 +1,12 @@
 import React from 'react'
-import HexagonTile from '../../components/hexagon-tile/HexagonTile'
+import HexagonLayout from '../../components/hexagon/HexagonLayout'
 
 export default class Game extends React.Component {
   render() {
     return (
       <div>
         <p>A good game</p>
-        <HexagonTile />
+        <HexagonLayout />
       </div>
     )
   }
