@@ -2,6 +2,11 @@ import * as React from 'react'
 import styled from 'react-emotion'
 import { css } from 'emotion'
 
+const COLORS = {
+  red: '#C90424',
+  blue: '#0197F6', // #abf8ff
+}
+
 const hexOuter = css`
   background: #abf8ff;
   width: 100px;
@@ -55,12 +60,15 @@ const HexFrame = styled('div')`
 `
 const HexOuter1 = styled('div')`
   ${hexOuter} ${h1};
+  background-color: ${props => COLORS[props.color]};
 `
 const HexOuter2 = styled('div')`
   ${hexOuter} ${h2};
+  background-color: ${props => COLORS[props.color]};
 `
 const HexOuter3 = styled('div')`
   ${hexOuter} ${h3};
+  background-color: ${props => COLORS[props.color]};
 `
 const HexInner1 = styled('div')`
   ${hexInner} ${h1};
@@ -73,7 +81,7 @@ const HexInner3 = styled('div')`
 `
 const HexLabel = styled('div')`
   position: absolute;
-  color: #abf8ff;
+  color: ${props => COLORS[props.color]};
   font-weight: bold;
   font-size: 100px;
   left: 22px;
@@ -83,16 +91,20 @@ const HexLabel = styled('div')`
 `
 
 export default class HexagonTile extends React.Component {
+  static defaultProps = {
+    color: 'blue',
+  }
+
   render() {
     return (
       <HexFrame x={this.props.x} y={this.props.y}>
-        <HexOuter1 />
-        <HexOuter2 />
-        <HexOuter3 />
-        <HexInner1 />
-        <HexInner2 />
-        <HexInner3 />
-        <HexLabel>+</HexLabel>
+        <HexOuter1 color={this.props.color} />
+        <HexOuter2 color={this.props.color} />
+        <HexOuter3 color={this.props.color} />
+        <HexInner1 color={this.props.color} />
+        <HexInner2 color={this.props.color} />
+        <HexInner3 color={this.props.color} />
+        <HexLabel color={this.props.color}>+</HexLabel>
       </HexFrame>
     )
   }

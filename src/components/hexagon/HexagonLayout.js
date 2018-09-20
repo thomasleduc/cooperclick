@@ -14,7 +14,7 @@ const HexagonLayoutContainer = styled('div')`
 
 export default class HexagonLayout extends React.Component {
   static defaultProps = {
-    size: 1,
+    size: 3,
   }
 
   layoutNeedMoreRows(rowNumber) {
