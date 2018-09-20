@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "apollo-client": "^2.4.2",
+    "apollo-boost": "^0.1.16",
+    "emotion": "^9.2.10",
     "eslint-plugin-prettier": "^2.6.2",
+    "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "react": "^16.5.2",
     "react-apollo": "^2.1.11",
     "react-dom": "^16.5.2",
     "react-emotion": "^9.2.10",
-    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5"
   },
   "scripts": {

@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import { Router, Route, browserHistory } from 'react-router'
-import ApolloClient, { createNetworkInterface } from 'apollo-client'
+import { BrowserRouter, Route } from 'react-router-dom'
+import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-import { injectGlobal } from 'react-emotion'
+import { injectGlobal } from 'emotion'
 
 import Game from './views/game/Game'
 import SelectTeam from './views/select-team/SelectTeam'
 
-const networkInterface = createNetworkInterface({
-  uri: 'https://api.graph.cool/simple/v1/__PROJECT_ID__'
-})
-
+// the Apollo cache is set up automatically
 const client = new ApolloClient({
-  networkInterface
+  uri: 'http://'
 })
 
 injectGlobal`
@@ -37,10 +34,12 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Router history={browserHistory}>
-          <Route path="/" component={SelectTeam} />
-          <Route path="/game/:gameId" component={Game} />
-        </Router>
+        <BrowserRouter>
+          <div>
+            <Route path="/" component={SelectTeam} />
+            <Route path="/game/:gameId" component={Game} />
+          </div>
+        </BrowserRouter>
       </ApolloProvider>
     )
   }
