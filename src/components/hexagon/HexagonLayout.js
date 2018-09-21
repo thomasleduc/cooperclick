@@ -63,6 +63,23 @@ export default class HexagonLayout extends React.Component {
     return hexes
   }
 
+  selfDestruct = () => {
+    console.log('SELF DESTRUCTION IMMINENT')
+    const newHexes = this.state.hexagons.map(hex => ({
+      ...hex,
+      x: hex.x + (Math.random() - 0.5) * 200,
+      y: hex.y + (Math.random() - 0.5) * 200,
+    }))
+    this.setState({ hexagons: newHexes })
+  }
+
+  hasWon() {
+    return (
+      this.state.hexagons.every(hex => hex.color === 'blue') ||
+      this.state.hexagons.every(hex => hex.color === 'red')
+    )
+  }
+
   toggleHexWaiting(hexId) {
     const newHexes = [...this.state.hexagons]
     const hexToUpdate = newHexes.find(hex => hex.id === hexId)
@@ -81,9 +98,15 @@ export default class HexagonLayout extends React.Component {
   onHexClick = (hexId, userId) => {
     return () => {
       console.log('Hex was clicked:', hexId, userId)
+      const { team } = this.props
       const hex = this.state.hexagons.find(hex => hex.id === hexId)
-      if (hex.isWaiting) return this.convertHex(hexId)
-      this.toggleHexWaiting(hexId, userId)
+      if (team.color !== hex.color) {
+        if (hex.isWaiting) this.convertHex(hexId)
+        else this.toggleHexWaiting(hexId, userId)
+      }
+      if (this.hasWon()) {
+        setInterval(this.selfDestruct, 200)
+      }
     }
   }
 
