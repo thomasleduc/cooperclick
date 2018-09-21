@@ -4,7 +4,7 @@ const rooms = [
   {
     id: "SDFGHJH",
     size: 2,
-    cells: [{ id: "1", state: "BLUE", domination: "BLUE" }]
+    cells: [{ id: "1", state: "BLUE", domination: "player_1" }]
   }
 ];
 
@@ -17,6 +17,7 @@ const typeDefs = gql`
   type Cell {
     id: String
     state: CellState
+    domination: String
   }
 
   type Room {
