@@ -9,7 +9,7 @@ export default class Game extends React.Component {
         {({ team }) => (
           <div>
             <p>A good game {team.name}</p>
-            <HexagonLayout team={team} />
+            <HexagonLayout team={team} userId={1234} />
           </div>
         )}
       </TeamConsumer>

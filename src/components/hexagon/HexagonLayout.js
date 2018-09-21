@@ -3,7 +3,7 @@ import styled from 'react-emotion'
 
 import HexagonTile from './HexagonTile'
 
-const LAYOUT_HEIGHT = 600
+const LAYOUT_HEIGHT = 100
 const HEX_SIZE = 100
 const MARGIN = 10
 
@@ -16,6 +16,14 @@ const HexagonLayoutContainer = styled('div')`
 export default class HexagonLayout extends React.Component {
   static defaultProps = {
     size: 1,
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      hexagons: this.getRows(0, 1 + this.props.size * 2),
+    }
   }
 
   layoutNeedMoreRows(rowNumber) {
@@ -32,6 +40,8 @@ export default class HexagonLayout extends React.Component {
         x: rowOffsetLeft + hexOffsetLeft,
         y: LAYOUT_HEIGHT / 2 - rowNumber * HEX_SIZE,
         id: rowNumber * 10 + (rowNumber >= 0 ? i : -i),
+        color: Math.random() >= 0.5 ? 'blue' : 'red',
+        isWaiting: false,
       })
     }
 
@@ -53,18 +63,43 @@ export default class HexagonLayout extends React.Component {
     return hexes
   }
 
+  toggleHexWaiting(hexId) {
+    const newHexes = [...this.state.hexagons]
+    const hexToUpdate = newHexes.find(hex => hex.id === hexId)
+    hexToUpdate.isWaiting = !hexToUpdate.isWaiting
+    this.setState({ hexagons: newHexes })
+  }
+
+  convertHex(hexId) {
+    const newHexes = [...this.state.hexagons]
+    const hexToUpdate = newHexes.find(hex => hex.id === hexId)
+    hexToUpdate.color = hexToUpdate.color === 'blue' ? 'red' : 'blue'
+    hexToUpdate.isWaiting = false
+    this.setState({ hexagons: newHexes })
+  }
+
+  onHexClick = (hexId, userId) => {
+    return () => {
+      console.log('Hex was clicked:', hexId, userId)
+      const hex = this.state.hexagons.find(hex => hex.id === hexId)
+      if (hex.isWaiting) return this.convertHex(hexId)
+      this.toggleHexWaiting(hexId, userId)
+    }
+  }
+
   render() {
-    const hexagons = this.getRows(0, 1 + this.props.size * 2)
     return (
       <HexagonLayoutContainer height={LAYOUT_HEIGHT}>
         <React.Fragment>
-          {hexagons.map(hexagon => (
+          {this.state.hexagons.map(hexagon => (
             <HexagonTile
               x={hexagon.x}
               y={hexagon.y}
               id={hexagon.id}
               key={hexagon.id}
-              color={this.props.team.color}
+              color={hexagon.color}
+              isWaiting={hexagon.isWaiting}
+              onClick={this.onHexClick}
             />
           ))}
         </React.Fragment>

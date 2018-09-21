@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'react-emotion'
 import { css } from 'emotion'
 
-const COLORS = {
+export const COLORS = {
   red: '#C90424',
   blue: '#0197F6', // #abf8ff
 }
@@ -20,8 +20,7 @@ const hexInner = css`
   left: 2.5px;
   top: 51px !important;
   border-radius: 0;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
+  transition: all 0.2s;
 `
 const h1 = css`
   position: absolute;
@@ -31,13 +30,11 @@ const h2 = css`
   position: absolute;
   top: 50px;
   transform: rotate(60deg);
-  -webkit-transform: rotate(60deg);
 `
 const h3 = css`
   position: absolute;
   top: 50px;
   transform: rotate(-60deg);
-  -webkit-transform: rotate(-60deg);
 `
 
 const HexFrame = styled('div')`
@@ -50,12 +47,11 @@ const HexFrame = styled('div')`
   margin-top: 20px;
   position: absolute;
   cursor: pointer;
+  /* user-select: none; */
   transform-origin: 50% 58px;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
+  transition: all 0.2s;
   &:hover {
     transform: scale(0.9);
-    -webkit-transform: scale(0.9);
   }
 `
 const HexOuter1 = styled('div')`
@@ -81,13 +77,13 @@ const HexInner3 = styled('div')`
 `
 const HexLabel = styled('div')`
   position: absolute;
+  user-select: none;
   color: ${props => COLORS[props.color]};
   font-weight: bold;
   font-size: 100px;
   left: 22px;
   top: 7px;
   transition: all 0.4s;
-  -webkit-transition: all 0.4s;
 `
 
 export default class HexagonTile extends React.Component {
@@ -96,15 +92,20 @@ export default class HexagonTile extends React.Component {
   }
 
   render() {
+    const symbol = this.props.isWaiting ? '?' : '+'
     return (
-      <HexFrame x={this.props.x} y={this.props.y}>
+      <HexFrame
+        x={this.props.x}
+        y={this.props.y}
+        onClick={this.props.onClick(this.props.id)}
+      >
         <HexOuter1 color={this.props.color} />
         <HexOuter2 color={this.props.color} />
         <HexOuter3 color={this.props.color} />
         <HexInner1 color={this.props.color} />
         <HexInner2 color={this.props.color} />
         <HexInner3 color={this.props.color} />
-        <HexLabel color={this.props.color}>+</HexLabel>
+        <HexLabel color={this.props.color}>{symbol}</HexLabel>
       </HexFrame>
     )
   }
