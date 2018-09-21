@@ -1,4 +1,6 @@
-const { ApolloServer, gql } = require("apollo-server");
+const express = require("express");
+const path = require("path");
+const { ApolloServer, gql } = require("apollo-server-express");
 
 const rooms = [
   {
@@ -31,21 +33,29 @@ const typeDefs = gql`
   }
 `;
 
-// Resolvers define the technique for fetching the types in the
-// schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
     rooms: () => rooms
   }
 };
 
-// In the most basic sense, the ApolloServer can be started
-// by passing type definitions (typeDefs) and the resolvers
-// responsible for fetching the data for those types.
-const server = new ApolloServer({ typeDefs, resolvers });
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
-// This `listen` method launches a web-server.  Existing apps
-// can utilize middleware options, which we'll discuss later.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+const app = express();
+
+// Add Apollo to express
+apolloServer.applyMiddleware({ app });
+
+// Add static file of React app on /
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
+
+const port = process.env.PORT || 8080;
+
+app.listen({ port }, () =>
+  console.log(
+    `🚀 Server ready at http://localhost:${port}${apolloServer.graphqlPath}`
+  )
+);

@@ -2,11 +2,14 @@
   "name": "zapollo",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "apollo-boost": "^0.1.16",
     "apollo-server": "^2.1.0",
+    "apollo-server-express": "^2.1.0",
     "emotion": "^9.2.10",
     "eslint-plugin-prettier": "^2.6.2",
+    "express": "^4.16.3",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "react": "^16.5.2",
@@ -18,8 +21,7 @@
   },
   "scripts": {
     "start-client": "react-scripts start",
-    "start-server": "node server/index.js",
-    "start": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\"",
+    "start": "npm build && node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
