@@ -10,9 +10,7 @@ import SelectTeam from './views/select-team/SelectTeam.container'
 import AnaglyphicText from './components/anaglyphic-text/AnaglyphicText'
 
 // the Apollo cache is set up automatically
-const client = new ApolloClient({
-  uri: 'http://',
-})
+const client = new ApolloClient()
 
 injectGlobal`
   @import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400';

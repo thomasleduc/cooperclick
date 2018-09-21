@@ -8,8 +8,9 @@ const HEX_SIZE = 100
 const MARGIN = 10
 
 const HexagonLayoutContainer = styled('div')`
-  width: 400px;
+  width: 600px;
   height: ${props => `${props.height}px`};
+  position: relative;
 `
 
 export default class HexagonLayout extends React.Component {
@@ -51,12 +52,6 @@ export default class HexagonLayout extends React.Component {
     }
     return hexes
   }
-
-  // getRecursiveRows() {}
-
-  // getHexagonPositions(size) {
-  //   return [...this.getRow(1, 2), ...this.getRow(0, 3), ...this.getRow(-1, 2)]
-  // }
 
   render() {
     const hexagons = this.getRows(0, 1 + this.props.size * 2)
