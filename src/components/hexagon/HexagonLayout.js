@@ -21,6 +21,7 @@ export default class HexagonLayout extends React.Component {
   constructor(props) {
     super(props)
 
+    this.destructionInterval
     this.state = {
       hexagons: this.getRows(0, 1 + this.props.size * 2),
     }
@@ -67,7 +68,7 @@ export default class HexagonLayout extends React.Component {
     console.log('SELF DESTRUCTION IMMINENT')
     const newHexes = this.state.hexagons.map(hex => ({
       ...hex,
-      x: hex.x + (Math.random() - 0.5) * 200,
+      x: hex.x + Math.random() * 100,
       y: hex.y + (Math.random() - 0.5) * 200,
     }))
     this.setState({ hexagons: newHexes })
@@ -105,7 +106,8 @@ export default class HexagonLayout extends React.Component {
         else this.toggleHexWaiting(hexId, userId)
       }
       if (this.hasWon()) {
-        setInterval(this.selfDestruct, 200)
+        this.destructionInterval = setInterval(this.selfDestruct, 200)
+        setTimeout(() => clearInterval(this.destructionInterval), 5000)
       }
     }
   }
